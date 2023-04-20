@@ -36,6 +36,10 @@ public class Usuario {
 	private String img;
 	private String grupos_interesses;
 	
+	//Um usuario pode fazer varios pedidos
+	
+	//
+	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Endereco> enderecos = new ArrayList<>();
 }

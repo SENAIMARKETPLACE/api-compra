@@ -1,13 +1,17 @@
 package br.com.senai.sollaris.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.senai.sollaris.data.model.Endereco;
@@ -29,15 +33,24 @@ public class Pedido {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@ManyToOne
 	private Usuario usuario;
 	
+	@ManyToOne
 	private Endereco endereco;
 	
+	@ManyToOne
 	private Pagamento pagamento;
 	
 	private LocalDateTime data_pedido;
-	private LocalDateTime data_expiracao;
 	
 	@Enumerated(EnumType.STRING)
 	private PedidoStatus status;
+	
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+	private List<Pedido_Itens> pedido_Itens;
+
+	public LocalDateTime getDataExpiracao() {
+		return data_pedido.plusHours(pagamento.getTempoEmHoras());
+	}
 }

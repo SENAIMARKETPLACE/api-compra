@@ -1,7 +1,5 @@
 package br.com.senai.sollaris.domain;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,5 +22,7 @@ public class Pagamento {
 	private Integer id;
 	private String nome;
 	private String descricao;
-	private LocalDateTime processamento;
+	private Long tempoEmHoras;
+	
+	//Muitos pagamentos podem estar em um pedido
 }

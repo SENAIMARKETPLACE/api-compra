@@ -30,4 +30,5 @@ public class Produto {
 	private Integer quantidade;
 	private LocalDateTime dt_registro;
 	private LocalDateTime dt_alteracao;
+	
 }
