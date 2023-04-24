@@ -1,6 +1,7 @@
 package br.com.senai.sollaris.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -48,7 +49,7 @@ public class Pedido {
 	private PedidoStatus status;
 	
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
-	private List<Pedido_Itens> pedido_Itens;
+	private List<Pedido_Itens> pedido_Itens = new ArrayList<>();
 
 	public LocalDateTime getDataExpiracao() {
 		return data_pedido.plusHours(pagamento.getTempoEmHoras());

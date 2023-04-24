@@ -1,5 +1,8 @@
 package br.com.senai.sollaris.data.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,8 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.senai.sollaris.domain.Pedido;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,4 +45,6 @@ public class Endereco {
 	private String complemento;
 	
 	//Um endereco pode etsra em vários pedidos
+	@OneToMany(mappedBy = "endereco", cascade = CascadeType.PERSIST)
+	List<Pedido> listaPedidos = new ArrayList<>();
 }

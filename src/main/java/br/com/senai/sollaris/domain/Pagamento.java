@@ -1,9 +1,14 @@
 package br.com.senai.sollaris.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -25,4 +30,6 @@ public class Pagamento {
 	private Long tempoEmHoras;
 	
 	//Muitos pagamentos podem estar em um pedido
+	@OneToMany(mappedBy = "pagamento", cascade = CascadeType.PERSIST)
+	List<Pedido> pedido_pagamento = new ArrayList<>();
 }

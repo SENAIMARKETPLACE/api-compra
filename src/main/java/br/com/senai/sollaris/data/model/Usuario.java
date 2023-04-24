@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.senai.sollaris.domain.Pedido;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,8 +38,8 @@ public class Usuario {
 	private String grupos_interesses;
 	
 	//Um usuario pode fazer varios pedidos
-	
-	//
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.PERSIST)
+	List<Pedido> listaPedidos = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Endereco> enderecos = new ArrayList<>();

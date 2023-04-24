@@ -1,11 +1,15 @@
 package br.com.senai.sollaris.data.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -31,4 +35,6 @@ public class Produto {
 	private LocalDateTime dt_registro;
 	private LocalDateTime dt_alteracao;
 	
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+	private List<Produto_Detalhe> produto_Detalhes = new ArrayList<>();
 }
