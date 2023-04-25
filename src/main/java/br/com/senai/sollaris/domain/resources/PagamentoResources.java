@@ -18,6 +18,7 @@ import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.senai.sollaris.domain.resources.dtos.input.PostPagamentoDto;
+import br.com.senai.sollaris.domain.resources.dtos.input.PutPagamentoDto;
 import br.com.senai.sollaris.domain.resources.dtos.output.ReturnPagamentoDto;
 import br.com.senai.sollaris.domain.resources.services.PagamentoService;
 
@@ -45,12 +46,12 @@ public class PagamentoResources {
 	}
 	
 	@PutMapping("{id}")
-	public void alterarPagamento(@PathVariable Integer id) {
-		pagamentoService.alterarPagamento();
+	public void alterarPagamento(@PathVariable Integer id, @RequestBody @Valid PutPagamentoDto pagamentoDto) {
+		pagamentoService.alterarPagamento(id, pagamentoDto);
 	}
 	
 	@DeleteMapping("{id}")
-	public void deletarPagamento(@PathVariable Integer id) {
-		pagamentoService.deletarPagamento(id);
+	public ResponseEntity<Object> deletarPagamento(@PathVariable Integer id) {
+		return pagamentoService.deletarPagamento(id);
 	}
 }

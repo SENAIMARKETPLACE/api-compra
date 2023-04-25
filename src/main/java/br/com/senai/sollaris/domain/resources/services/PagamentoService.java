@@ -14,6 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.senai.sollaris.domain.Pagamento;
 import br.com.senai.sollaris.domain.repositories.PagamentoRepository;
 import br.com.senai.sollaris.domain.resources.dtos.input.PostPagamentoDto;
+import br.com.senai.sollaris.domain.resources.dtos.input.PutPagamentoDto;
 import br.com.senai.sollaris.domain.resources.dtos.output.ReturnPagamentoDto;
 import br.com.senai.sollaris.domain.resources.services.exceptions.ObjetoNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +46,26 @@ public class PagamentoService {
 		
 	}
 	
+	@Transactional
+	public ResponseEntity<ReturnPagamentoDto> alterarPagamento(Integer id, PutPagamentoDto pagamentoDto) {
+		Pagamento pagamento = pagamentoRepository.findById(id)
+				.orElseThrow(() -> new ObjetoNaoEncontradoException("Método de pagamento não encontrado no sistema"));
+		
+		pagamento.alterarMetodoPagamento(pagamentoDto);
+		
+		return ResponseEntity.ok(new ReturnPagamentoDto(pagamento));
+		
+	}
 	
-
+	@Transactional
+	public ResponseEntity<Object> deletarPagamento(Integer id) {
+		if (pagamentoRepository.existsById(id)) {
+			pagamentoRepository.deleteById(id);
+			return ResponseEntity.noContent().build();
+		}
+		
+		return ResponseEntity.notFound().build();
+		
+	}
 
 }
