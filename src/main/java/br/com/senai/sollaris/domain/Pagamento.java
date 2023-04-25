@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.senai.sollaris.domain.resources.dtos.input.PostPagamentoDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter @Setter
 public class Pagamento {
-	
+
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
@@ -32,4 +33,10 @@ public class Pagamento {
 	//Muitos pagamentos podem estar em um pedido
 	@OneToMany(mappedBy = "pagamento", cascade = CascadeType.PERSIST)
 	List<Pedido> pedido_pagamento = new ArrayList<>();
+	
+	public Pagamento(PostPagamentoDto pagamentoDto) {
+		this.nome = pagamentoDto.getNome();
+		this.descricao = pagamentoDto.getDescricao();
+		this.tempoEmHoras = pagamentoDto.getTempoEmHoras();
+	}
 }

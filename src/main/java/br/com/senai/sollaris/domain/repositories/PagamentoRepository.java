@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.senai.sollaris.domain.Pagamento;
 
-public interface PagamentoRepository extends JpaRepository<Integer, Pagamento> {
+public interface PagamentoRepository extends JpaRepository<Pagamento, Integer> {
 
 }
