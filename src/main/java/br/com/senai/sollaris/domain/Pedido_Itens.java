@@ -27,7 +27,7 @@ public class Pedido_Itens {
 	@ManyToOne()
 	private Pedido pedido;
 	
-	@ManyToOne
+	@ManyToOne()
 	private Produto_Detalhe produto_Detalhe;
 	
 	@Column(name = "qtd")
