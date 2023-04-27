@@ -15,12 +15,16 @@ import lombok.Setter;
 public class ReturnPedidoDto {
 	
 	private Integer pedido_id;
-	private UsuarioDto usuario;
-	private EnderecoDto endereco;
+	private ReturnUsuarioDto usuario;
+	private ReturnEnderecoDto endereco;
 	private List<ReturnPedido_ItensDto> produtos_selecionados = new ArrayList<>();
 	
 	public ReturnPedidoDto(Pedido pedido) {
-		// TODO Auto-generated constructor stub
+		this.pedido_id = pedido.getId();
+		this.usuario = new ReturnUsuarioDto(pedido.getUsuario());
+		this.endereco = new ReturnEnderecoDto(pedido.getEndereco());
+		this.produtos_selecionados = pedido.getPedido_Itens().stream()
+				.map(pedido_item -> new ReturnPedido_ItensDto(pedido_item)).toList();
 	}
 	
 }
