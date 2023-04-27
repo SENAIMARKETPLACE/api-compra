@@ -34,8 +34,8 @@ public class PagamentoResources {
 	}
 	
 	@GetMapping("{id}")
-	public void listarPagamento(@PathVariable Integer id) {
-		pagamentoService.listarPagamento(id);
+	public ResponseEntity<ReturnPagamentoDto> listarPagamento(@PathVariable Integer id) {
+		return pagamentoService.listarPagamento(id);
 	}
 	
 	@PostMapping
@@ -45,8 +45,8 @@ public class PagamentoResources {
 	}
 	
 	@PutMapping("{id}")
-	public void alterarPagamento(@PathVariable Integer id, @RequestBody @Valid PutPagamentoDto pagamentoDto) {
-		pagamentoService.alterarPagamento(id, pagamentoDto);
+	public ResponseEntity<ReturnPagamentoDto> alterarPagamento(@PathVariable Integer id, @RequestBody @Valid PutPagamentoDto pagamentoDto) {
+		return pagamentoService.alterarPagamento(id, pagamentoDto);
 	}
 	
 	@DeleteMapping("{id}")
