@@ -1,6 +1,8 @@
 package br.com.senai.sollaris.domain.resources.services;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.senai.sollaris.domain.repositories.PedidoRepository;
@@ -14,7 +16,8 @@ public class PedidoService {
 	private final PedidoRepository pedidoRepository;
 	
 	//Eu quero retornar um pedido com seus respectivos produtos
-	public void listarPedidos(Pageable pageable) {
-		pedidoRepository.findAll(pageable).map(pedido -> new ReturnPedidoDto(pedido));
+	public ResponseEntity<Page<ReturnPedidoDto>> listarPedidos(Pageable pageable) {
+		return ResponseEntity.ok(pedidoRepository.findAll(pageable).map(pedido -> new ReturnPedidoDto(pedido)));
+		
 	}
 }

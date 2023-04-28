@@ -31,7 +31,6 @@ public class Produto {
 	private String descricao;
 	private Double preco;
 	private String img;
-	private Integer quantidade;
 	private LocalDateTime dt_registro;
 	private LocalDateTime dt_alteracao;
 	

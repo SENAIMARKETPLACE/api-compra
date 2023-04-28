@@ -18,6 +18,8 @@ public class ReturnPedido_ItensDto {
 	private Double valorUnitario;
 	
 	public ReturnPedido_ItensDto(Pedido_Itens pedido_item) {
-		// TODO Auto-generated constructor stub
+		this.id = pedido_item.getId();
+		this.produto_detalhado_id = pedido_item.getProduto_Detalhe().getId();
+		this.nome = pedido_item.getProduto_Detalhe().getProduto().getNome();
 	}
 }

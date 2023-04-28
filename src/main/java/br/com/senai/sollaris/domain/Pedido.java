@@ -46,7 +46,7 @@ public class Pedido {
 	private LocalDateTime data_pedido;
 	
 	@Enumerated(EnumType.STRING)
-	private PedidoStatus status;
+	private PedidoStatus pedido_status;
 	
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private List<Pedido_Itens> pedido_Itens = new ArrayList<>();
