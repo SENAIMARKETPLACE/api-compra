@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,12 @@ public class PedidoResources {
 	private PedidoService pedidoService;
 	
 	@GetMapping
-	public ResponseEntity<Page<ReturnPedidoDto>> listarTodos(Pageable pageable) {
+	public ResponseEntity<Page<ReturnPedidoDto>> listarPedidos(Pageable pageable) {
 		return pedidoService.listarPedidos(pageable);
+	}
+	
+	@GetMapping("{id}")
+	public ResponseEntity<ReturnPedidoDto> listarPedido(@PathVariable Integer id) {
+		return pedidoService.listarPedido(id);
 	}
 }

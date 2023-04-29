@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.senai.sollaris.domain.repositories.PedidoRepository;
 import br.com.senai.sollaris.domain.resources.dtos.output.ReturnPedidoDto;
+import br.com.senai.sollaris.domain.resources.services.exceptions.ObjetoNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -19,5 +20,11 @@ public class PedidoService {
 	public ResponseEntity<Page<ReturnPedidoDto>> listarPedidos(Pageable pageable) {
 		return ResponseEntity.ok(pedidoRepository.findAll(pageable).map(pedido -> new ReturnPedidoDto(pedido)));
 		
+	}
+	
+	public ResponseEntity<ReturnPedidoDto> listarPedido(Integer id) {
+		return ResponseEntity.ok(pedidoRepository.findById(id)
+				.map(ReturnPedidoDto::new)
+				.orElseThrow(() -> new ObjetoNaoEncontradoException("Pedido não localizado no sistema!")));		
 	}
 }

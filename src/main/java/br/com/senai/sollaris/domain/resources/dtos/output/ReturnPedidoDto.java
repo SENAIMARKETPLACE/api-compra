@@ -17,13 +17,13 @@ public class ReturnPedidoDto {
 	private Integer pedido_id;
 	private ReturnUsuarioDto usuario;
 	private ReturnEnderecoDto endereco;
-	private List<ReturnPedido_ItensDto> produtos_selecionados = new ArrayList<>();
+	private List<ReturnPedido_ItensDto> produtos = new ArrayList<>();
 	
 	public ReturnPedidoDto(Pedido pedido) {
 		this.pedido_id = pedido.getId();
 		this.usuario = new ReturnUsuarioDto(pedido.getUsuario());
 		this.endereco = new ReturnEnderecoDto(pedido.getEndereco());
-		this.produtos_selecionados = pedido.getPedido_Itens().stream()
+		this.produtos = pedido.getPedido_Itens().stream()
 				.map(pedido_item -> new ReturnPedido_ItensDto(pedido_item)).toList();
 	}
 	
