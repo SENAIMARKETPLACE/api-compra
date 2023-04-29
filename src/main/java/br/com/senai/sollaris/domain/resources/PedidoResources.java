@@ -7,9 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.senai.sollaris.domain.resources.dtos.input.PostPedidoDto;
 import br.com.senai.sollaris.domain.resources.dtos.output.ReturnPedidoDto;
 import br.com.senai.sollaris.domain.resources.services.PedidoService;
 
@@ -28,6 +31,11 @@ public class PedidoResources {
 	@GetMapping("{id}")
 	public ResponseEntity<ReturnPedidoDto> listarPedido(@PathVariable Integer id) {
 		return pedidoService.listarPedido(id);
+	}
+	
+	@PostMapping
+	public void cadastrarPedido(PostPedidoDto pedidoDto, UriComponentsBuilder uriBuilder) {
+		pedidoService.cadastrarPedido(pedidoDto, uriBuilder);
 	}
 	
 	@DeleteMapping("{id}")
