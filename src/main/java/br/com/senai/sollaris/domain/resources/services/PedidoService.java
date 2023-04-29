@@ -27,4 +27,13 @@ public class PedidoService {
 				.map(ReturnPedidoDto::new)
 				.orElseThrow(() -> new ObjetoNaoEncontradoException("Pedido não localizado no sistema!")));		
 	}
+
+	public ResponseEntity<Object> deletarPedido(Integer id) {
+		if (pedidoRepository.existsById(id)) {
+			pedidoRepository.deleteById(id);
+			return ResponseEntity.noContent().build();
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
 }

@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter @Setter
 public class ReturnPedido_ItensDto {
 
-	private Integer id;
+	private Integer pedido_itens_id;
 	
 	private Integer produto_detalhado_id;
 	private String nome;
@@ -24,7 +24,7 @@ public class ReturnPedido_ItensDto {
 	private Double valorTotal;
 	
 	public ReturnPedido_ItensDto(Pedido_Itens pedido_item) {
-		this.id = pedido_item.getId();
+		this.pedido_itens_id = pedido_item.getId();
 		this.produto_detalhado_id = pedido_item.getProduto_Detalhe().getId();
 		this.nome = pedido_item.getProduto_Detalhe().getProduto().getNome();
 		this.descricao = pedido_item.getProduto_Detalhe().getProduto().getNome();
