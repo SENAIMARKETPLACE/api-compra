@@ -17,12 +17,12 @@ import br.com.senai.sollaris.domain.resources.dtos.input.PostPagamentoDto;
 import br.com.senai.sollaris.domain.resources.dtos.input.PutPagamentoDto;
 import br.com.senai.sollaris.domain.resources.dtos.output.ReturnPagamentoDto;
 import br.com.senai.sollaris.domain.resources.services.exceptions.ObjetoNaoEncontradoException;
+import br.com.senai.sollaris.domain.resources.services.exceptions.PagamentoNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
 public class PagamentoService {
-	
 	private final PagamentoRepository pagamentoRepository;
 
 	public ResponseEntity<Page<ReturnPagamentoDto>> listarPagamentos(Pageable pageable) {
@@ -34,6 +34,13 @@ public class PagamentoService {
 		return ResponseEntity.ok(pagamentoRepository.findById(id)
 				.map(ReturnPagamentoDto::new)
 				.orElseThrow(() -> new ObjetoNaoEncontradoException("Método de pagamento escolhido não encontrado no sistema")));
+	}
+	
+	//Utilizado pelo PedidoService
+	public Pagamento buscarPagamento(Integer id) {
+		
+		return pagamentoRepository.findById(id)
+				.orElseThrow(() -> new PagamentoNaoEncontradoException("Método de pagamento escolhido inválido!"));
 	}
 	
 	@Transactional

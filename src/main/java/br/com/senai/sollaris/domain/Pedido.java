@@ -54,4 +54,17 @@ public class Pedido {
 	public LocalDateTime getDataExpiracao() {
 		return data_pedido.plusHours(pagamento.getTempoEmHoras());
 	}
+
+	public Pedido(Usuario usuario2, Endereco endereco2, Pagamento pagamento2) {
+		this.usuario = usuario2;
+		this.endereco = endereco2;
+		this.pagamento = pagamento2;
+		pedido_status = PedidoStatus.AGUARDANDO_APROVACAO;
+		this.data_pedido = LocalDateTime.now();
+	}
+
+	public void salvarProdutos(List<Pedido_Itens> listaDeProdutos) {
+		this.pedido_Itens.addAll(listaDeProdutos);
+		
+	}
 }

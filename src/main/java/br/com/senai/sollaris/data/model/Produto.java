@@ -1,6 +1,5 @@
 package br.com.senai.sollaris.data.model;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.senai.sollaris.data.resources.ReturnProdutoDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +23,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter @Setter
 public class Produto {
-	
+
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
@@ -31,9 +31,15 @@ public class Produto {
 	private String descricao;
 	private Double preco;
 	private String img;
-	private LocalDateTime dt_registro;
-	private LocalDateTime dt_alteracao;
 	
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
 	private List<Produto_Detalhe> produto_Detalhes = new ArrayList<>();
+	
+	public Produto(ReturnProdutoDto returnProdutoDetalhe) {
+		this.id = returnProdutoDetalhe.getId();
+		this.nome = returnProdutoDetalhe.getNome();
+		this.descricao = returnProdutoDetalhe.getDescricao();
+		this.img = returnProdutoDetalhe.getImg();
+		this.preco = returnProdutoDetalhe.getPreco();
+	}
 }

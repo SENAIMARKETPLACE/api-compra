@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.senai.sollaris.data.resources.ReturnEnderecoDto;
 import br.com.senai.sollaris.domain.Pedido;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +29,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "enderecos")
 public class Endereco {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -47,4 +49,15 @@ public class Endereco {
 	//Um endereco pode etsra em vários pedidos
 	@OneToMany(mappedBy = "endereco", cascade = CascadeType.PERSIST)
 	List<Pedido> listaPedidos = new ArrayList<>();
+	
+	public Endereco(ReturnEnderecoDto endereco) {
+		this.id =  endereco.getId();
+		this.cep = endereco.getCep();
+		this.logradouro = endereco.getLogradouro();
+		this.numero = endereco.getNumero();
+		this.estado = endereco.getEstado();
+		this.bairro = endereco.getBairro();
+		this.cidade = endereco.getCidade();
+		this.complemento = endereco.getComplemento();
+	}
 }

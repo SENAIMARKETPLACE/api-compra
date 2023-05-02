@@ -1,6 +1,5 @@
 package br.com.senai.sollaris.data.model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.senai.sollaris.data.resources.ReturnUsuarioDto;
 import br.com.senai.sollaris.domain.Pedido;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,16 +26,11 @@ import lombok.Setter;
 @Table(name = "usuarios")
 public class Usuario {
 	
+
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String cpf;
-	private LocalDate dt_nascimento;
-	private String email;
-	private String senha;
-	private String telefone;
-	private String img;
-	private String grupos_interesses;
 	
 	//Um usuario pode fazer varios pedidos
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.PERSIST)
@@ -43,4 +38,15 @@ public class Usuario {
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Endereco> enderecos = new ArrayList<>();
+	
+	public Usuario(ReturnUsuarioDto usuarioDto) {
+		this.id = usuarioDto.getId();
+		this.nome = usuarioDto.getNome();
+		this.cpf = usuarioDto.getCpf();
+		this.enderecos = usuarioDto.getEnderecos()
+				.stream()
+				.map(endereco -> new Endereco(endereco))
+				.toList();
+				
+	}
 }

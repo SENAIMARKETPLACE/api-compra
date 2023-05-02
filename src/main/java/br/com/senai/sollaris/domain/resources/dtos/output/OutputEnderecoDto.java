@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-public class ReturnEnderecoDto {
+public class OutputEnderecoDto {
 	
 	private Integer id;
 	private String cep;
@@ -20,7 +20,7 @@ public class ReturnEnderecoDto {
 	private String cidade;
 	private String complemento;
 	
-	public ReturnEnderecoDto(Endereco endereco) {
+	public OutputEnderecoDto(Endereco endereco) {
 		this.id = endereco.getId();
 		this.cep = endereco.getCep();
 		this.logradouro = endereco.getLogradouro();

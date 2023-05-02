@@ -9,13 +9,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-public class ReturnUsuarioDto {
+public class OutputUsuarioDto {
 	
 	private Integer id;
 	private String nome;
 	private String cpf;
 	
-	public ReturnUsuarioDto(Usuario usuario) {
+	public OutputUsuarioDto(Usuario usuario) {
 		this.id = usuario.getId();
 		this.nome = usuario.getNome();
 		this.cpf = usuario.getCpf();
