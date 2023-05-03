@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-public class ReturnPedido_ItensDto {
+public class OutputPedido_ItensDto {
 
 	private Integer pedido_itens_id;
 	
@@ -21,9 +21,9 @@ public class ReturnPedido_ItensDto {
 	private String peso;
 	private String cor;
 	private Integer quantidade;
-	private Double valorTotal;
+	private Double valorUnitario;
 	
-	public ReturnPedido_ItensDto(Pedido_Itens pedido_item) {
+	public OutputPedido_ItensDto(Pedido_Itens pedido_item) {
 		this.pedido_itens_id = pedido_item.getId();
 		this.produto_detalhado_id = pedido_item.getProduto_Detalhe().getId();
 		this.nome = pedido_item.getProduto_Detalhe().getProduto().getNome();
@@ -33,6 +33,6 @@ public class ReturnPedido_ItensDto {
 		this.peso = pedido_item.getProduto_Detalhe().getPeso();
 		this.cor = pedido_item.getProduto_Detalhe().getCor();
 		this.quantidade = pedido_item.getQuantidade();
-		this.valorTotal = pedido_item.getQuantidade() * pedido_item.getProduto_Detalhe().getProduto().getPreco();
+		this.valorUnitario = pedido_item.getProduto_Detalhe().getProduto().getPreco();
 	}
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.senai.sollaris.domain.resources.dtos.input.PostPedidoDto;
-import br.com.senai.sollaris.domain.resources.dtos.output.ReturnPedidoDto;
+import br.com.senai.sollaris.domain.resources.dtos.output.OutputPedidoDto;
 import br.com.senai.sollaris.domain.resources.services.PedidoService;
 
 @RestController
@@ -27,17 +27,17 @@ public class PedidoResources {
 	private PedidoService pedidoService;
 	
 	@GetMapping
-	public ResponseEntity<Page<ReturnPedidoDto>> listarPedidos(Pageable pageable) {
+	public ResponseEntity<Page<OutputPedidoDto>> listarPedidos(Pageable pageable) {
 		return pedidoService.listarPedidos(pageable);
 	}
 	
 	@GetMapping("{id}")
-	public ResponseEntity<ReturnPedidoDto> listarPedido(@PathVariable Integer id) {
+	public ResponseEntity<OutputPedidoDto> listarPedido(@PathVariable Integer id) {
 		return pedidoService.listarPedido(id);
 	}
 	
 	@PostMapping
-	public ResponseEntity<ReturnPedidoDto> cadastrarPedido(@RequestBody @Valid PostPedidoDto pedidoDto, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<OutputPedidoDto> cadastrarPedido(@RequestBody @Valid PostPedidoDto pedidoDto, UriComponentsBuilder uriBuilder) {
 		return pedidoService.cadastrarPedido(pedidoDto, uriBuilder);
 	}
 	

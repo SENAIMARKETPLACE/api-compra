@@ -1,5 +1,8 @@
 package br.com.senai.sollaris.domain.resources.dtos.output;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import br.com.senai.sollaris.data.model.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
+@JsonInclude(value = Include.NON_NULL)
 public class OutputEnderecoDto {
 	
 	private Integer id;
@@ -18,6 +22,7 @@ public class OutputEnderecoDto {
 	private String estado;
 	private String bairro;
 	private String cidade;
+	@JsonInclude(value = Include.NON_EMPTY)
 	private String complemento;
 	
 	public OutputEnderecoDto(Endereco endereco) {

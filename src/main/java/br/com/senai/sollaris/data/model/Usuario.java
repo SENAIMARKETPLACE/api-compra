@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import br.com.senai.sollaris.data.resources.ReturnUsuarioDto;
+import br.com.senai.sollaris.data.resources.ReturnUsuarioDto2;
 import br.com.senai.sollaris.domain.Pedido;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,14 +39,11 @@ public class Usuario {
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Endereco> enderecos = new ArrayList<>();
 	
-	public Usuario(ReturnUsuarioDto usuarioDto) {
+	public Usuario(ReturnUsuarioDto2 usuarioDto) {
 		this.id = usuarioDto.getId();
 		this.nome = usuarioDto.getNome();
 		this.cpf = usuarioDto.getCpf();
-		this.enderecos = usuarioDto.getEnderecos()
-				.stream()
-				.map(endereco -> new Endereco(endereco))
-				.toList();
+		this.enderecos.add(new Endereco(usuarioDto.getEndereco()));
 				
 	}
 }

@@ -18,7 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.senai.sollaris.domain.resources.dtos.input.PostPagamentoDto;
 import br.com.senai.sollaris.domain.resources.dtos.input.PutPagamentoDto;
-import br.com.senai.sollaris.domain.resources.dtos.output.ReturnPagamentoDto;
+import br.com.senai.sollaris.domain.resources.dtos.output.OutputPagamentoDto;
 import br.com.senai.sollaris.domain.resources.services.PagamentoService;
 
 @RestController
@@ -29,23 +29,23 @@ public class PagamentoResources {
 	private PagamentoService pagamentoService;
 	
 	@GetMapping
-	public ResponseEntity<Page<ReturnPagamentoDto>> listarPagamentos(Pageable pageable) {
+	public ResponseEntity<Page<OutputPagamentoDto>> listarPagamentos(Pageable pageable) {
 		return pagamentoService.listarPagamentos(pageable);
 	}
 	
 	@GetMapping("{id}")
-	public ResponseEntity<ReturnPagamentoDto> listarPagamento(@PathVariable Integer id) {
+	public ResponseEntity<OutputPagamentoDto> listarPagamento(@PathVariable Integer id) {
 		return pagamentoService.listarPagamento(id);
 	}
 	
 	@PostMapping
-	public ResponseEntity<ReturnPagamentoDto> cadastrarNovoPagamento(@RequestBody @Valid PostPagamentoDto pagamentoDto, 
+	public ResponseEntity<OutputPagamentoDto> cadastrarNovoPagamento(@RequestBody @Valid PostPagamentoDto pagamentoDto, 
 			UriComponentsBuilder uriBuilder) {
 		return pagamentoService.cadastrarPagamento(pagamentoDto, uriBuilder);
 	}
 	
 	@PutMapping("{id}")
-	public ResponseEntity<ReturnPagamentoDto> alterarPagamento(@PathVariable Integer id, @RequestBody @Valid PutPagamentoDto pagamentoDto) {
+	public ResponseEntity<OutputPagamentoDto> alterarPagamento(@PathVariable Integer id, @RequestBody @Valid PutPagamentoDto pagamentoDto) {
 		return pagamentoService.alterarPagamento(id, pagamentoDto);
 	}
 	

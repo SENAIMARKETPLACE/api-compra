@@ -9,13 +9,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-public class ReturnPagamentoDto {
+public class OutputPagamentoDto {
 	private Integer id;
 	private String nome;
 	private String descricao;
 	private Long tempoEmHoras;
 	
-	public ReturnPagamentoDto (Pagamento pagamento) {
+	public OutputPagamentoDto (Pagamento pagamento) {
 		this.id = pagamento.getId();
 		this.nome = pagamento.getNome();
 		this.descricao = pagamento.getDescricao();
