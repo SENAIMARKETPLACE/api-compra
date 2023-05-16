@@ -16,7 +16,6 @@ import br.com.senai.sollaris.domain.repositories.PagamentoRepository;
 import br.com.senai.sollaris.domain.resources.dtos.input.PostPagamentoDto;
 import br.com.senai.sollaris.domain.resources.dtos.input.PutPagamentoDto;
 import br.com.senai.sollaris.domain.resources.dtos.output.OutputPagamentoDto;
-import br.com.senai.sollaris.domain.resources.services.exceptions.ObjetoNaoEncontradoException;
 import br.com.senai.sollaris.domain.resources.services.exceptions.PagamentoNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 
@@ -33,7 +32,7 @@ public class PagamentoService {
 	public ResponseEntity<OutputPagamentoDto> listarPagamento(Integer id) {
 		return ResponseEntity.ok(pagamentoRepository.findById(id)
 				.map(OutputPagamentoDto::new)
-				.orElseThrow(() -> new ObjetoNaoEncontradoException("Método de pagamento escolhido não encontrado no sistema")));
+				.orElseThrow(() -> new PagamentoNaoEncontradoException("Método de pagamento escolhido não encontrado no sistema")));
 	}
 	
 	//Utilizado pelo PedidoService
@@ -56,7 +55,7 @@ public class PagamentoService {
 	@Transactional
 	public ResponseEntity<OutputPagamentoDto> alterarPagamento(Integer id, PutPagamentoDto pagamentoDto) {
 		Pagamento pagamento = pagamentoRepository.findById(id)
-				.orElseThrow(() -> new ObjetoNaoEncontradoException("Método de pagamento não encontrado no sistema"));
+				.orElseThrow(() -> new PagamentoNaoEncontradoException("Método de pagamento não encontrado no sistema"));
 		
 		pagamento.alterarMetodoPagamento(pagamentoDto);
 		
