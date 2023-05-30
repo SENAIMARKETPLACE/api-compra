@@ -2,7 +2,9 @@ package br.com.senai.sollaris.domain.resources.services;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -29,8 +31,10 @@ import br.com.senai.sollaris.domain.repositories.Pedido_ItensRepository;
 import br.com.senai.sollaris.domain.resources.dtos.input.Pedido_ItensDto;
 import br.com.senai.sollaris.domain.resources.dtos.input.PostPedidoDto;
 import br.com.senai.sollaris.domain.resources.dtos.output.OutputPedidoDto;
+import br.com.senai.sollaris.domain.resources.dtos.output.OutputUsuarioDto;
 import br.com.senai.sollaris.domain.resources.services.exceptions.DadosInvalidosException;
 import br.com.senai.sollaris.domain.resources.services.exceptions.ObjetoNaoEncontradoException;
+import br.com.senai.sollaris.domain.resources.services.exceptions.PedidoNaoEncontradoException;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -120,5 +124,25 @@ public class PedidoService {
 		}
 		
 		return ResponseEntity.notFound().build();
+	}
+
+	public ResponseEntity<List<OutputPedidoDto>> listarPedidoPorUsuario(Integer id) {
+		
+		List<OutputPedidoDto> pedidoDto = pedidoRepository.findByUsuario_Id(id)
+				.map(pedidos -> pedidos.stream()
+					.map(pedido -> {
+						OutputPedidoDto outputPedidoDto = new OutputPedidoDto(pedido);
+						// Realize qualquer transformação adicional no objeto "outputPedidoDto" se necessário
+						return outputPedidoDto;
+					})
+					.collect(Collectors.toList())
+				)
+				.orElse(Collections.emptyList());
+		
+		if (pedidoDto.isEmpty())
+			throw new PedidoNaoEncontradoException("Este pedido não foi encontrado com sucesso");
+		
+		return ResponseEntity.ok(pedidoDto);
+		
 	}
 }

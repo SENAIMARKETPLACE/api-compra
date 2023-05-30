@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import br.com.senai.sollaris.domain.resources.services.exceptions.DadosInvalidosException;
 import br.com.senai.sollaris.domain.resources.services.exceptions.ObjetoNaoEncontradoException;
 import br.com.senai.sollaris.domain.resources.services.exceptions.PagamentoNaoEncontradoException;
+import br.com.senai.sollaris.domain.resources.services.exceptions.PedidoNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -67,6 +68,15 @@ public class handleExceptions extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(PagamentoNaoEncontradoException.class)
 	public ResponseEntity<RespostaException> PagamentoNaoEncontrado(PagamentoNaoEncontradoException ex, HttpServletRequest httpServletRequest) {
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		
+		RespostaException respostaException = new RespostaException(ex.getMessage(), status.value(), httpServletRequest);
+		
+		return ResponseEntity.status(status).body(respostaException);
+	}
+	
+	@ExceptionHandler(PedidoNaoEncontradoException.class)
+	public ResponseEntity<RespostaException> PagamentoNaoEncontrado(PedidoNaoEncontradoException ex, HttpServletRequest httpServletRequest) {
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		
 		RespostaException respostaException = new RespostaException(ex.getMessage(), status.value(), httpServletRequest);

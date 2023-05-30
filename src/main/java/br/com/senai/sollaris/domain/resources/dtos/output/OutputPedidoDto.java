@@ -31,7 +31,6 @@ public class OutputPedidoDto {
 		this.valorTotal = calcularValorTotal(produtos);
 	}
 	
-	
 	public Double calcularValorTotal(List<OutputPedido_ItensDto> list) {
 		Double valorTotal;
 		double valor = 0;
@@ -43,5 +42,8 @@ public class OutputPedidoDto {
 		
 		return valorTotal;
 	}
+
+
+
 	
 }

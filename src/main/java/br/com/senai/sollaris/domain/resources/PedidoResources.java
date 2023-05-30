@@ -1,5 +1,7 @@
 package br.com.senai.sollaris.domain.resources;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,11 @@ public class PedidoResources {
 	@GetMapping("{id}")
 	public ResponseEntity<OutputPedidoDto> listarPedido(@PathVariable Integer id) {
 		return pedidoService.listarPedido(id);
+	}
+	
+	@GetMapping("/my_orders/{id}")
+	public ResponseEntity<List<OutputPedidoDto>> listarPedidoPorUsuario(@PathVariable Integer id) {
+		 return pedidoService.listarPedidoPorUsuario(id);
 	}
 	
 	@PostMapping
