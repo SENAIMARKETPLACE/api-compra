@@ -110,10 +110,11 @@ public class PedidoService {
 			URI uri = uriBuilder.path("api/orders/{id}").buildAndExpand(pedido.getId()).toUri();
 			return ResponseEntity.created(uri).body(new OutputPedidoDto(pedido));
 			
-		} catch (FeignException e) {
-			throw new DadosInvalidosException("Usuário e/ou Produto estão inválido, tente novamente!");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
+		return ResponseEntity.internalServerError().build();
 	}
 	
 	@Transactional
